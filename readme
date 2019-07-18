@@ -1,0 +1,60 @@
+1迁移
+先切换到 en3-stock 环境
+workon evn3-stock
+
+2.在本地的虚拟环境中，项目根目录下，执行命令收集所有包
+
+cd  /Users/zzy/PycharmProjects/python-workspace/downfunddata
+
+
+这里需要使用到的工具叫pipreqs,先安装:
+
+pip install pipreqs
+
+
+装好之后cmd到要生成requirements.txt的主项目路径下:
+
+执行命令:   pipreqs ./
+
+此时就生成了该项目所需的所有包的 requirements.txt文件,
+
+
+3.通过ftp软件将开发好的项目上传到此服务器的某个目录  /www/zzy/ (新建 zzydown 网站 )
+安装并创建虚拟环境，如果已有则跳过此步
+
+sudo pip install virtualenv
+
+
+sudo easy_install virtualenvwrapper  (将所有的虚拟环境目录全都集中起来，比如放到 ~/virtualenvs/，并对不同的虚拟环境使用不同的目录来管理)
+
+
+
+
+但是在使用virtualenvwrapper之前，要运行virtualenvwrapper.sh文件，需要设置环境变量，也就是把下面两行代码写进 ~/.bashrc里，但是我的电脑里并没有~/.bashrc，查了一下解决办法，比如自己创建个bashrc写进去两行代码，也不管用。
+export WORKON_HOME=/www/zzy/workspace
+source /usr/bin/virtualenvwrapper.sh
+
+
+最后要 source ~/.bashrc
+
+
+mkvirtualenv  env1-stock
+
+
+4. 压缩工程:
+
+cd  /Users/zzy/PycharmProjects/python-workspace/downfunddata
+tar -zcvf  downfunddata.tar.gz *  ( 现在服务器上建立目录. 因为解压时候都是散的)
+
+
+
+5 .在虚拟环境上工作，安装所有需要的包
+workon   env1-stock
+pip install -r requirements.txt
+
+6. 脚本
+
+sh /www/wwwroot/zzydownload.com/downfunddata/downfundata.sh
+ 把 downfundata.sh 里的内容 放到宝塔的计划任务中就可以了
+
+
